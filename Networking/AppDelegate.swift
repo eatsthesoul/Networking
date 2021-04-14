@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let menuVC = MenuViewController()
-        let navigationController = UINavigationController(rootViewController: menuVC)
-        window?.rootViewController = navigationController
+//        let menuVC = MenuViewController()
+//        let navigationController = UINavigationController(rootViewController: menuVC)
+        let loginVC = LoginViewController()
+        window?.rootViewController = loginVC
         window?.makeKeyAndVisible()
-        window?.backgroundColor = .systemGray5
-        // Override point for customization after application launch.
+        window?.backgroundColor = .white
         return true
     }
     
