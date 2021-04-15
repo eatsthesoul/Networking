@@ -46,6 +46,7 @@
 		4F8C0FB525FA14E60009591D /* DownloadImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageViewController.swift; sourceTree = "<group>"; };
 		4F92294A26243CC900EB505C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4F922951262701B600EB505C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4F92295B262726D400EB505C /* Networking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Networking.entitlements; sourceTree = "<group>"; };
 		4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequestViewController.swift; sourceTree = "<group>"; };
 		4FE3A90325FE868100C3B6CD /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + spinner.swift"; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		4F83102C25F8EFE7009F8817 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4F92295B262726D400EB505C /* Networking.entitlements */,
 				4F83102D25F8EFE7009F8817 /* AppDelegate.swift */,
 				4FE3A90A25FEA78D00C3B6CD /* Controllers */,
 				4F88F7B826032CB800BC0B9B /* Views */,
@@ -431,6 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Networking/Networking.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28423D34T2;
 				INFOPLIST_FILE = Networking/Info.plist;
@@ -451,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Networking/Networking.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28423D34T2;
 				INFOPLIST_FILE = Networking/Info.plist;

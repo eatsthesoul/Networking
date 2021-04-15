@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -26,12 +27,28 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let fbLoginButton: FBLoginButton = {
+        let button = FBLoginButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fbLoginButton.delegate = self
+        
+        
         setupViews()
         setupLayout()
+        
+        if let token = AccessToken.current, !token.isExpired {
+            print("User is logged in")
+        }
     }
     
     //MARK: - Setup User Interface functions
@@ -39,6 +56,7 @@ class LoginViewController: UIViewController {
     private func setupViews() {
         view.addSubview(logoImageView)
         view.addSubview(networkingLabel)
+        view.addSubview(fbLoginButton)
     }
     
     private func setupLayout() {
@@ -51,6 +69,29 @@ class LoginViewController: UIViewController {
         networkingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         networkingLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 35).isActive = true
         networkingLabel.widthAnchor.constraint(equalToConstant: view.bounds.width / 5 * 3).isActive = true
+        
+        fbLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        fbLoginButton.topAnchor.constraint(equalTo: networkingLabel.bottomAnchor, constant: 35).isActive = true
     }
 
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        
+        if error != nil {
+            print(error!)
+            return
+        }
+        
+        print("Successfully logged in with facebook")
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("Successfully logged out from facebook")
+    }
+    
+    
 }
