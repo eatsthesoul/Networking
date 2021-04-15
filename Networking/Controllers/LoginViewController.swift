@@ -80,13 +80,11 @@ extension LoginViewController: LoginButtonDelegate {
     
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        
         if error != nil {
             print(error!)
             return
         }
-        
-        print("Successfully logged in with facebook")
+        self.dismiss(animated: true, completion: nil)
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {

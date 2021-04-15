@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications
 import Alamofire
+import FBSDKLoginKit
 
 enum Actions: String, CaseIterable {
     case downloadImage = "Download Image"
@@ -53,6 +54,8 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        
+        
         menuCollectionView.dataSource = self
         menuCollectionView.delegate = self
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.identifier)
@@ -69,6 +72,7 @@ class MenuViewController: UIViewController {
         }
         
         registerForNotification()
+        checkLoggedIn()
     }
     
     
@@ -219,8 +223,6 @@ class MenuViewController: UIViewController {
             self.downloadAlert.message = "\(Int(progress * 100))%"
         }
         
-        
-        
         present(downloadAlert, animated: true)
     }
 
@@ -312,5 +314,21 @@ extension MenuViewController {
         let request = UNNotificationRequest(identifier: "DownloadComplete", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+}
+
+//MARK: - Facebook SDK
+
+extension MenuViewController {
+    
+    private func checkLoggedIn() {
+        guard let token = AccessToken.current, !token.isExpired else {
+            DispatchQueue.main.async {
+                let loginVC = LoginViewController()
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: false, completion: nil)
+            }
+            return
+        }
     }
 }
