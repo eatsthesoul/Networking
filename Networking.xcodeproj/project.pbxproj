@@ -26,7 +26,6 @@
 		4F922972262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F922971262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift */; };
 		4FE3A90125FE860100C3B6CD /* GetRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */; };
 		4FE3A90425FE868100C3B6CD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90325FE868100C3B6CD /* Comment.swift */; };
-		4FE3A90725FE8FF700C3B6CD /* UIViewController + spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */; };
 		5097398AE949D3B41AB956E5 /* Pods_Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825688517A0CD496314B556D /* Pods_Networking.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +54,6 @@
 		4F922971262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer + backgroundGradient.swift"; sourceTree = "<group>"; };
 		4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequestViewController.swift; sourceTree = "<group>"; };
 		4FE3A90325FE868100C3B6CD /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + spinner.swift"; sourceTree = "<group>"; };
 		825688517A0CD496314B556D /* Pods_Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				4F83104525F8F5A7009F8817 /* UIView + AnchoredConstraints.swift */,
-				4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */,
 				4F922971262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift */,
 			);
 			path = Extensions;
@@ -299,7 +296,6 @@
 				4FE3A90425FE868100C3B6CD /* Comment.swift in Sources */,
 				4F52CF1425FEAF0100A53FEE /* GetRequestTableViewCell.swift in Sources */,
 				4F4A2084261301620065BB13 /* BackgroundDownloadService.swift in Sources */,
-				4FE3A90725FE8FF700C3B6CD /* UIViewController + spinner.swift in Sources */,
 				4F4A207E2609E7280065BB13 /* MenuCollectionViewCell.swift in Sources */,
 				4F4A20812611B25A0065BB13 /* ImageProperties.swift in Sources */,
 				4F83102E25F8EFE7009F8817 /* AppDelegate.swift in Sources */,

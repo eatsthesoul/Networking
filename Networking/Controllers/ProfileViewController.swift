@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class ProfileViewController: UIViewController {
     
@@ -18,6 +19,13 @@ class ProfileViewController: UIViewController {
         label.text = "Logged in with Facebook"
         return label
     }()
+    
+    private let fbLogoutButton: FBLoginButton = {
+        let button = FBLoginButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +36,16 @@ class ProfileViewController: UIViewController {
 
         setupViews()
         setupLayout()
+        
     }
+    
+    
     
     private func setupViews() {
         view.addSubview(label)
+        view.addSubview(fbLogoutButton)
+        
+        fbLogoutButton.delegate = self
     }
     
     private func setupLayout() {
@@ -40,17 +54,31 @@ class ProfileViewController: UIViewController {
         label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
         label.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
+        fbLogoutButton.anchor(top: nil,
+                              leading: view.leadingAnchor,
+                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                              trailing: view.trailingAnchor,
+                              padding: .init(top: 0, left: 70, bottom: 20, right: 70))
+    }
+
+}
+
+extension ProfileViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if error != nil {
+            print(error!)
+            return
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        openLoginVC()
     }
-    */
-
+    
+    func openLoginVC() {
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: false, completion: nil)
+    }
+    
 }
