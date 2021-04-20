@@ -8,10 +8,37 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    let label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Light", size: 30)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Logged in with Facebook"
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let background = CAGradientLayer.backgroundGradient()
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, at: 0)
 
+        setupViews()
+        setupLayout()
+    }
+    
+    private func setupViews() {
+        view.addSubview(label)
+    }
+    
+    private func setupLayout() {
+        
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
     }
     

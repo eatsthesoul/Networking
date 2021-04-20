@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        checkLoggedIn()
         configure()
     }
     
@@ -32,14 +34,23 @@ class TabBarController: UITabBarController {
         
         return navController
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
 }
+
+//MARK: - Facebook SDK
+
+extension TabBarController {
+    
+    private func checkLoggedIn() {
+        guard let token = AccessToken.current, !token.isExpired else {
+            DispatchQueue.main.async {
+                let loginVC = LoginViewController()
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: false, completion: nil)
+            }
+            return
+        }
+    }
+}
+

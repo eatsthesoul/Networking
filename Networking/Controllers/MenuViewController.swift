@@ -8,7 +8,6 @@
 import UIKit
 import UserNotifications
 import Alamofire
-import FBSDKLoginKit
 
 enum Actions: String, CaseIterable {
     case downloadImage = "Download Image"
@@ -71,7 +70,6 @@ class MenuViewController: UIViewController {
         }
         
         registerForNotification()
-        checkLoggedIn()
     }
     
     
@@ -312,18 +310,4 @@ extension MenuViewController {
     }
 }
 
-//MARK: - Facebook SDK
 
-extension MenuViewController {
-    
-    private func checkLoggedIn() {
-        guard let token = AccessToken.current, !token.isExpired else {
-            DispatchQueue.main.async {
-                let loginVC = LoginViewController()
-                loginVC.modalPresentationStyle = .fullScreen
-                self.present(loginVC, animated: false, completion: nil)
-            }
-            return
-        }
-    }
-}
