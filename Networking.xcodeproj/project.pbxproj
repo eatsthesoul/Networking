@@ -21,6 +21,8 @@
 		4F8C0FB625FA14E60009591D /* DownloadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C0FB525FA14E60009591D /* DownloadImageViewController.swift */; };
 		4F92294B26243CC900EB505C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4F92294A26243CC900EB505C /* .gitignore */; };
 		4F922952262701B600EB505C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F922951262701B600EB505C /* LoginViewController.swift */; };
+		4F9229642628C5C800EB505C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9229632628C5C800EB505C /* ProfileViewController.swift */; };
+		4F922968262EF69100EB505C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F922967262EF69100EB505C /* TabBarController.swift */; };
 		4FE3A90125FE860100C3B6CD /* GetRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */; };
 		4FE3A90425FE868100C3B6CD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90325FE868100C3B6CD /* Comment.swift */; };
 		4FE3A90725FE8FF700C3B6CD /* UIViewController + spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */; };
@@ -47,6 +49,8 @@
 		4F92294A26243CC900EB505C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4F922951262701B600EB505C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4F92295B262726D400EB505C /* Networking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Networking.entitlements; sourceTree = "<group>"; };
+		4F9229632628C5C800EB505C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4F922967262EF69100EB505C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequestViewController.swift; sourceTree = "<group>"; };
 		4FE3A90325FE868100C3B6CD /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4FE3A90625FE8FF700C3B6CD /* UIViewController + spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + spinner.swift"; sourceTree = "<group>"; };
@@ -139,8 +143,10 @@
 		4FE3A90A25FEA78D00C3B6CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F922967262EF69100EB505C /* TabBarController.swift */,
 				4F922951262701B600EB505C /* LoginViewController.swift */,
 				4F83103125F8EFE7009F8817 /* MenuViewController.swift */,
+				4F9229632628C5C800EB505C /* ProfileViewController.swift */,
 				4F8C0FB525FA14E60009591D /* DownloadImageViewController.swift */,
 				4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */,
 			);
@@ -281,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F922952262701B600EB505C /* LoginViewController.swift in Sources */,
+				4F922968262EF69100EB505C /* TabBarController.swift in Sources */,
 				4F72CD6C26149D3E00C8F9C8 /* AlamofireNetworkingService.swift in Sources */,
 				4F83104625F8F5A7009F8817 /* UIView + AnchoredConstraints.swift in Sources */,
 				4FE3A90125FE860100C3B6CD /* GetRequestViewController.swift in Sources */,
@@ -292,6 +299,7 @@
 				4F4A207E2609E7280065BB13 /* MenuCollectionViewCell.swift in Sources */,
 				4F4A20812611B25A0065BB13 /* ImageProperties.swift in Sources */,
 				4F83102E25F8EFE7009F8817 /* AppDelegate.swift in Sources */,
+				4F9229642628C5C800EB505C /* ProfileViewController.swift in Sources */,
 				4F8C0FB325FA0E920009591D /* NetworkingService.swift in Sources */,
 				4F8C0FB625FA14E60009591D /* DownloadImageViewController.swift in Sources */,
 			);

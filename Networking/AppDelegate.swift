@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let menuVC = MenuViewController()
-        let navigationController = UINavigationController(rootViewController: menuVC)
-        window?.rootViewController = navigationController
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
         window?.backgroundColor = .white
         

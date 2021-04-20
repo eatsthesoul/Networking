@@ -60,7 +60,6 @@ class MenuViewController: UIViewController {
         menuCollectionView.delegate = self
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.identifier)
         
-        setupNavigationController()
         setupViews()
         setupLayout()
         
@@ -90,10 +89,6 @@ class MenuViewController: UIViewController {
                           trailing: view.safeAreaLayoutGuide.trailingAnchor,
                           padding: .init(top: 30, left: 0, bottom: 0, right: 0))
 
-    }
-    
-    private func setupNavigationController() {
-        navigationItem.title = "Menu"
     }
     
     
