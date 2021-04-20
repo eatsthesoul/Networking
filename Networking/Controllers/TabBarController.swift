@@ -20,7 +20,7 @@ class TabBarController: UITabBarController {
     private func configure() {
         
         let menu = createNavController(with: MenuViewController(), title: "Menu", image: #imageLiteral(resourceName: "blank"))
-        let profile = createNavController(with: ProfileViewController(), title: "Profile", image: #imageLiteral(resourceName: "blank"))
+        let profile = createNavController(with: ProfileViewController(), title: "Profile", image: #imageLiteral(resourceName: "profile"))
         
         self.viewControllers = [menu, profile]
     }

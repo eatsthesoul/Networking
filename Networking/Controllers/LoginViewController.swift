@@ -33,22 +33,29 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private let customFbLoginButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBlue
+        button.setTitle("Login with Facebook", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 4
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleCustomFbLogin), for: .touchUpInside)
+        return button
+    }()
 
-
-
-
+    
+    //MARK: - VC Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fbLoginButton.delegate = self
         
-        
         setupViews()
         setupLayout()
-        
-        if let token = AccessToken.current, !token.isExpired {
-            print("User is logged in")
-        }
     }
     
     //MARK: - Setup User Interface functions
@@ -57,6 +64,7 @@ class LoginViewController: UIViewController {
         view.addSubview(logoImageView)
         view.addSubview(networkingLabel)
         view.addSubview(fbLoginButton)
+        view.addSubview(customFbLoginButton)
     }
     
     private func setupLayout() {
@@ -72,6 +80,12 @@ class LoginViewController: UIViewController {
         
         fbLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         fbLoginButton.topAnchor.constraint(equalTo: networkingLabel.bottomAnchor, constant: 35).isActive = true
+        fbLoginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        
+        customFbLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        customFbLoginButton.topAnchor.constraint(equalTo: fbLoginButton.bottomAnchor, constant: 20).isActive = true
+        customFbLoginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        customFbLoginButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
 
 }
@@ -84,12 +98,32 @@ extension LoginViewController: LoginButtonDelegate {
             print(error!)
             return
         }
-        self.dismiss(animated: true, completion: nil)
+        openMainVC()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("Successfully logged out from facebook")
     }
     
+    func openMainVC() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
+    @objc func handleCustomFbLogin() {
+        
+        LoginManager().logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let result = result  else { return }
+                
+            if result.isCancelled { return }
+            else {
+                self.openMainVC()
+            }
+        }
+    }
 }
