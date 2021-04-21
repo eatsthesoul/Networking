@@ -7,6 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -109,7 +110,7 @@ extension LoginViewController: LoginButtonDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func handleCustomFbLogin() {
+    @objc private func handleCustomFbLogin() {
         
         LoginManager().logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             
@@ -122,8 +123,22 @@ extension LoginViewController: LoginButtonDelegate {
                 
             if result.isCancelled { return }
             else {
+                self.signIntoFirebase()
                 self.openMainVC()
             }
+        }
+    }
+    
+    private func signIntoFirebase() {
+        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+        Auth.auth().signIn(with: credential) { (result, error) in
+
+            if let error = error {
+                print("Something went wrong with FB user: \(error.localizedDescription)")
+                return
+            }
+            
+            print("Succesfully logged in with FB user: \(result!)")
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -76,9 +77,17 @@ extension ProfileViewController: LoginButtonDelegate {
     }
     
     func openLoginVC() {
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: false, completion: nil)
+        
+        do {
+            try Auth.auth().signOut()
+            
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: false, completion: nil)
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
 }

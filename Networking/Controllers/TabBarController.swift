@@ -7,6 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class TabBarController: UITabBarController {
 
@@ -43,7 +44,7 @@ class TabBarController: UITabBarController {
 extension TabBarController {
     
     private func checkLoggedIn() {
-        guard let token = AccessToken.current, !token.isExpired else {
+        if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let loginVC = LoginViewController()
                 loginVC.modalPresentationStyle = .fullScreen

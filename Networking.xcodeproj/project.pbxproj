@@ -26,6 +26,7 @@
 		4F922972262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F922971262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift */; };
 		4FE3A90125FE860100C3B6CD /* GetRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */; };
 		4FE3A90425FE868100C3B6CD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90325FE868100C3B6CD /* Comment.swift */; };
+		4FE72CB926306643002D9ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FE72CB826306643002D9ADC /* GoogleService-Info.plist */; };
 		5097398AE949D3B41AB956E5 /* Pods_Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825688517A0CD496314B556D /* Pods_Networking.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		4F922971262F06BD00EB505C /* CAGradientLayer + backgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer + backgroundGradient.swift"; sourceTree = "<group>"; };
 		4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequestViewController.swift; sourceTree = "<group>"; };
 		4FE3A90325FE868100C3B6CD /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		4FE72CB826306643002D9ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		825688517A0CD496314B556D /* Pods_Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				4F83103625F8EFEC009F8817 /* Assets.xcassets */,
 				4F83103825F8EFEC009F8817 /* LaunchScreen.storyboard */,
 				4F83103B25F8EFEC009F8817 /* Info.plist */,
+				4FE72CB826306643002D9ADC /* GoogleService-Info.plist */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F83103A25F8EFEC009F8817 /* LaunchScreen.storyboard in Resources */,
+				4FE72CB926306643002D9ADC /* GoogleService-Info.plist in Resources */,
 				4F92294B26243CC900EB505C /* .gitignore in Resources */,
 				4F83103725F8EFEC009F8817 /* Assets.xcassets in Resources */,
 			);
