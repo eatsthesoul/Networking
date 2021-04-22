@@ -13,7 +13,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .systemGray2
+        label.backgroundColor = .lightGray
         label.font = UIFont(name: "Party LET", size: 50)
         label.numberOfLines = 0
         label.textAlignment = .center

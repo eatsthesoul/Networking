@@ -194,7 +194,7 @@ class MenuViewController: UIViewController {
         downloadAlert.addAction(cancelAction)
         
         // activity indicator
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.startAnimating()
         self.downloadAlert.view.addSubview(activityIndicator)
         activityIndicator.centerInSuperview()
