@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginButtonDelegate {
     
-    
+    //stock FB login button enter
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if error != nil {
             print(error!)
@@ -107,10 +107,7 @@ extension LoginViewController: LoginButtonDelegate {
         print("Successfully logged out from facebook")
     }
     
-    func openMainVC() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+    //custom FB login button enter
     @objc private func handleCustomFbLogin() {
         
         LoginManager().logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
@@ -130,6 +127,11 @@ extension LoginViewController: LoginButtonDelegate {
         }
     }
     
+    func openMainVC() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //data transfer to Firebase
     private func signIntoFirebase() {
         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         Auth.auth().signIn(with: credential) { (result, error) in
@@ -140,6 +142,20 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             print("Succesfully logged in with FB user: \(result!)")
+        }
+    }
+    
+    //get facebook fields
+    private func fetchFacebookFields() {
+        GraphRequest.init(graphPath: "me", parameters: ["fields" : "id, name, email"]).start { (_, result, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let result = result as? [String : Any] else { return }
+            print(result)
         }
     }
 }
