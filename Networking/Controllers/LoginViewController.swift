@@ -8,8 +8,11 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
+    
+    var userProfile: UserProfile?
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -122,7 +125,6 @@ extension LoginViewController: LoginButtonDelegate {
             if result.isCancelled { return }
             else {
                 self.signIntoFirebase()
-                self.openMainVC()
             }
         }
     }
@@ -141,7 +143,9 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
             
-            print("Succesfully logged in with FB user: \(result!)")
+            print("Succesfully logged in with FB user")
+            
+            self.fetchFacebookFields()
         }
     }
     
@@ -154,8 +158,29 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
             
-            guard let result = result as? [String : Any] else { return }
-            print(result)
+            guard let userData = result as? [String : Any] else { return }
+            self.userProfile = UserProfile(data: userData)
+            
+            self.saveUserFieldsToFirebase()
+        }
+    }
+    
+    private func saveUserFieldsToFirebase() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let userData = ["name": userProfile?.name, "email": userProfile?.email]
+        let values = [uid: userData]
+        
+        Database.database().reference().child("users").updateChildValues(values) { (error, _) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            print("Successfully saved info into Firebase database")
+            self.openMainVC()
         }
     }
 }

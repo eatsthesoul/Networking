@@ -27,6 +27,7 @@
 		4FE3A90125FE860100C3B6CD /* GetRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */; };
 		4FE3A90425FE868100C3B6CD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3A90325FE868100C3B6CD /* Comment.swift */; };
 		4FE72CB926306643002D9ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FE72CB826306643002D9ADC /* GoogleService-Info.plist */; };
+		4FE72CD92631EB10002D9ADC /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE72CD82631EB10002D9ADC /* UserProfile.swift */; };
 		5097398AE949D3B41AB956E5 /* Pods_Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825688517A0CD496314B556D /* Pods_Networking.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		4FE3A90025FE860100C3B6CD /* GetRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequestViewController.swift; sourceTree = "<group>"; };
 		4FE3A90325FE868100C3B6CD /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4FE72CB826306643002D9ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FE72CD82631EB10002D9ADC /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		825688517A0CD496314B556D /* Pods_Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 			children = (
 				4FE3A90325FE868100C3B6CD /* Comment.swift */,
 				4F4A20802611B25A0065BB13 /* ImageProperties.swift */,
+				4FE72CD82631EB10002D9ADC /* UserProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				4F9229642628C5C800EB505C /* ProfileViewController.swift in Sources */,
 				4F8C0FB325FA0E920009591D /* NetworkingService.swift in Sources */,
 				4F8C0FB625FA14E60009591D /* DownloadImageViewController.swift in Sources */,
+				4FE72CD92631EB10002D9ADC /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
