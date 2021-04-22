@@ -99,6 +99,7 @@ extension LoginViewController: LoginButtonDelegate {
             print(error!)
             return
         }
+        signIntoFirebase()
         openMainVC()
     }
     
