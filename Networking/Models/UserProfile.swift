@@ -23,4 +23,15 @@ struct UserProfile {
         self.name = name
         self.email = email
     }
+    
+    init?(uid: String, data: [String: Any]) {
+        
+        guard let name = data["name"] as? String,
+              let email = data["email"] as? String
+        else { return nil }
+        
+        self.id = uid
+        self.name = name
+        self.email = email
+    }
 }

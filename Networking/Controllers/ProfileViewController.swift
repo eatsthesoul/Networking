@@ -8,6 +8,7 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
     
@@ -17,8 +18,14 @@ class ProfileViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Logged in with Facebook"
         return label
+    }()
+    
+    let spinnerForLabel: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        return spinner
     }()
     
     private let fbLogoutButton: FBLoginButton = {
@@ -40,10 +47,17 @@ class ProfileViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfo()
+    }
     
     
     private func setupViews() {
+
         view.addSubview(label)
+        view.addSubview(spinnerForLabel)
         view.addSubview(fbLogoutButton)
         
         fbLogoutButton.delegate = self
@@ -54,6 +68,9 @@ class ProfileViewController: UIViewController {
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
         label.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        spinnerForLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinnerForLabel.topAnchor.constraint(equalTo: label.topAnchor, constant: 45).isActive = true
         
         fbLogoutButton.anchor(top: nil,
                               leading: view.leadingAnchor,
@@ -76,7 +93,8 @@ extension ProfileViewController: LoginButtonDelegate {
         openLoginVC()
     }
     
-    func openLoginVC() {
+    //log out of the profile
+    private func openLoginVC() {
         
         do {
             try Auth.auth().signOut()
@@ -90,4 +108,25 @@ extension ProfileViewController: LoginButtonDelegate {
         }
     }
     
+    //fetching user info from Firebase database
+    private func fetchUserInfo() {
+        
+        if let currentUser = Auth.auth().currentUser {
+            
+            let userID = currentUser.uid
+            let dataPath = Database.database().reference().child("users").child(userID)
+            
+            dataPath.observeSingleEvent(of: .value) { (snapshot) in
+                
+                guard let userInfo = snapshot.value as? [String : Any] else { return }
+                guard let user = UserProfile(uid: userID, data: userInfo) else { return }
+                self.label.text = "\(user.name ?? "")\nLogged in with Facebook"
+                self.spinnerForLabel.stopAnimating()
+                
+            } withCancel: { (error) in
+                
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
