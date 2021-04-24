@@ -9,6 +9,7 @@ import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -49,14 +50,22 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(handleCustomFbLogin), for: .touchUpInside)
         return button
     }()
-
+    
+    private let googleButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     //MARK: - VC Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         fbLoginButton.delegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         
         setupViews()
         setupLayout()
@@ -69,6 +78,7 @@ class LoginViewController: UIViewController {
         view.addSubview(networkingLabel)
         view.addSubview(fbLoginButton)
         view.addSubview(customFbLoginButton)
+        view.addSubview(googleButton)
     }
     
     private func setupLayout() {
@@ -90,10 +100,20 @@ class LoginViewController: UIViewController {
         customFbLoginButton.topAnchor.constraint(equalTo: fbLoginButton.bottomAnchor, constant: 20).isActive = true
         customFbLoginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         customFbLoginButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        googleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        googleButton.topAnchor.constraint(equalTo: customFbLoginButton.bottomAnchor, constant: 20).isActive = true
+        googleButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        googleButton.widthAnchor.constraint(equalToConstant: 305).isActive = true
     }
-
+    
+    func openMainVC() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
+
+//MARK: - Facebook SDK
 extension LoginViewController: LoginButtonDelegate {
     
     //stock FB login button enter
@@ -121,7 +141,7 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             guard let result = result  else { return }
-                
+            
             if result.isCancelled { return }
             else {
                 self.signIntoFirebase()
@@ -129,15 +149,11 @@ extension LoginViewController: LoginButtonDelegate {
         }
     }
     
-    func openMainVC() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     //data transfer to Firebase
     private func signIntoFirebase() {
         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         Auth.auth().signIn(with: credential) { (result, error) in
-
+            
             if let error = error {
                 print("Something went wrong with FB user: \(error.localizedDescription)")
                 return
@@ -180,6 +196,36 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             print("Successfully saved info into Firebase database")
+            self.openMainVC()
+        }
+    }
+}
+
+//MARK: - Google SDK
+
+extension LoginViewController: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            print("Failed to log into Google: ", error)
+            return
+        }
+        
+        print("Succesfully logged into Google")
+        
+        //getting user credentials
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        //sign into Firebase
+        Auth.auth().signIn(with: credential) { (result, error) in
+            if let error = error {
+                print("Something went wrong with Google user: ", error)
+                return
+            }
+            
+            print("Succsessfully logged into Firebase with Google user")
             self.openMainVC()
         }
     }
