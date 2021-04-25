@@ -12,6 +12,9 @@ import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
     
+    private var provider: String?
+    private var currentUser: UserProfile?
+    
     let label: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "AppleSDGothicNeo-Light", size: 30)
@@ -112,8 +115,10 @@ extension ProfileViewController {
             dataPath.observeSingleEvent(of: .value) { (snapshot) in
                 
                 guard let userInfo = snapshot.value as? [String : Any] else { return }
-                guard let user = UserProfile(uid: userID, data: userInfo) else { return }
-                self.label.text = "\(user.name ?? "")\nLogged in with Facebook"
+                self.currentUser = UserProfile(uid: userID, data: userInfo)
+                
+                self.label.text = self.getLabelText()
+                
                 self.spinnerForLabel.stopAnimating()
                 
             } withCancel: { (error) in
@@ -123,32 +128,57 @@ extension ProfileViewController {
         }
     }
     
-    @objc private func logOut() {
-        print("Logged out")
+    private func getCurrentProvider() {
         
         guard let providerData = Auth.auth().currentUser?.providerData else { return }
-        providerData.forEach({ (userInfo) in
-
-            switch userInfo.providerID {
+        
+        providerData.forEach { (userInfo) in
+            self.provider = userInfo.providerID
+        }
+    }
+    
+    //label functions
+    private func getLabelText() -> String {
+        
+        getCurrentProvider()
+        let text = "\(self.currentUser?.name ?? "Noname")\nLogged in with \(convertProviderForLabel())"
+        return text
+    }
+    
+    private func convertProviderForLabel() -> String {
+        
+        switch provider {
+        case "facebook.com":
+            return "Facebook"
+        case "google.com":
+            return "Google"
+        default:
+            return ""
+        }
+    }
+    
+    //log out functionality
+    @objc private func logOut() {
+        
+        switch self.provider {
+        
+        case "facebook.com":
+            LoginManager().logOut()
+            print("User logged out of Facebook")
+            openLoginVC()
             
-            case "facebook.com":
-                LoginManager().logOut()
-                print("User logged out of Facebook")
-                openLoginVC()
-                
-            case "google.com":
-                do {
-                    try Auth.auth().signOut()
-                } catch let signOutError as NSError {
-                    print ("Error signing out: %@", signOutError)
-                    return
-                }
-                print("User logged out of Facebook")
-                openLoginVC()
-                
-            default:
-                print("User is signed in with \(userInfo.providerID)")
+        case "google.com":
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+                return
             }
-        })
+            print("User logged out of Google")
+            openLoginVC()
+            
+        default:
+            break
+        }
     }
 }

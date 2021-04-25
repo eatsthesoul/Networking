@@ -213,6 +213,12 @@ extension LoginViewController: GIDSignInDelegate {
         
         print("Succesfully logged into Google")
         
+        //retrieving Google user fields
+        if let fullName = user.profile.name, let email = user.profile.email {
+            let userData = ["name": fullName, "email": email]
+            self.userProfile = UserProfile(data: userData)
+        }
+        
         //getting user credentials
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
@@ -225,7 +231,7 @@ extension LoginViewController: GIDSignInDelegate {
             }
             
             print("Succsessfully logged into Firebase with Google user")
-            self.openMainVC()
+            self.saveUserFieldsToFirebase()
         }
     }
 }
