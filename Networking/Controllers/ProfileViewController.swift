@@ -28,9 +28,15 @@ class ProfileViewController: UIViewController {
         return spinner
     }()
     
-    private let fbLogoutButton: FBLoginButton = {
-        let button = FBLoginButton()
+    private let logoutButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBlue
+        button.setTitle("Log out", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.layer.cornerRadius = 4
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         return button
     }()
     
@@ -58,9 +64,7 @@ class ProfileViewController: UIViewController {
 
         view.addSubview(label)
         view.addSubview(spinnerForLabel)
-        view.addSubview(fbLogoutButton)
-        
-        fbLogoutButton.delegate = self
+        view.addSubview(logoutButton)
     }
     
     private func setupLayout() {
@@ -72,26 +76,15 @@ class ProfileViewController: UIViewController {
         spinnerForLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         spinnerForLabel.topAnchor.constraint(equalTo: label.topAnchor, constant: 45).isActive = true
         
-        fbLogoutButton.anchor(top: nil,
-                              leading: view.leadingAnchor,
-                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                              trailing: view.trailingAnchor,
-                              padding: .init(top: 0, left: 70, bottom: 20, right: 70))
+        logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        logoutButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
 
 }
 
-extension ProfileViewController: LoginButtonDelegate {
-    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        if error != nil {
-            print(error!)
-            return
-        }
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        openLoginVC()
-    }
+extension ProfileViewController {
     
     //log out of the profile
     private func openLoginVC() {
@@ -128,5 +121,34 @@ extension ProfileViewController: LoginButtonDelegate {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    @objc private func logOut() {
+        print("Logged out")
+        
+        guard let providerData = Auth.auth().currentUser?.providerData else { return }
+        providerData.forEach({ (userInfo) in
+
+            switch userInfo.providerID {
+            
+            case "facebook.com":
+                LoginManager().logOut()
+                print("User logged out of Facebook")
+                openLoginVC()
+                
+            case "google.com":
+                do {
+                    try Auth.auth().signOut()
+                } catch let signOutError as NSError {
+                    print ("Error signing out: %@", signOutError)
+                    return
+                }
+                print("User logged out of Facebook")
+                openLoginVC()
+                
+            default:
+                print("User is signed in with \(userInfo.providerID)")
+            }
+        })
     }
 }
