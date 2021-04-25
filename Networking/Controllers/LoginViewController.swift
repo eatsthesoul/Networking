@@ -123,7 +123,6 @@ extension LoginViewController: LoginButtonDelegate {
             return
         }
         signIntoFirebase()
-        openMainVC()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
