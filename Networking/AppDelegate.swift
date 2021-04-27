@@ -30,10 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Google SDK
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = TabBarController()
-        window?.makeKeyAndVisible()
-        window?.backgroundColor = .white
+             
+             window?.rootViewController = TabBarController()
+             window?.makeKeyAndVisible()
+             //background settings
+             let background = CAGradientLayer.backgroundGradient()
+             background.frame = window?.bounds ?? CGRect()
+             window?.layer.insertSublayer(background, at: 0)
         
         return true
     }

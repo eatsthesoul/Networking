@@ -29,6 +29,7 @@ class MenuViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .clear
+        collectionView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 25, right: 0)
         return collectionView
     }()
     
@@ -53,14 +54,17 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        
-        
         menuCollectionView.dataSource = self
         menuCollectionView.delegate = self
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.identifier)
         
         setupViews()
         setupLayout()
+        
+//        //background settings
+//        let background = CAGradientLayer.backgroundGradient()
+//        background.frame = self.view.bounds
+//        self.view.layer.insertSublayer(background, at: 0)
         
         //that stuff will be open when app reload in the background after background tasks will be completed
         backgroundDownloadService.fileLocation = { (location) in
@@ -69,6 +73,7 @@ class MenuViewController: UIViewController {
             self.postNotification()
         }
         
+        //background notification
         registerForNotification()
     }
     
@@ -85,7 +90,7 @@ class MenuViewController: UIViewController {
                           leading: view.safeAreaLayoutGuide.leadingAnchor,
                           bottom: view.safeAreaLayoutGuide.bottomAnchor,
                           trailing: view.safeAreaLayoutGuide.trailingAnchor,
-                          padding: .init(top: 30, left: 0, bottom: 0, right: 0))
+                          padding: .init(top: 0, left: 0, bottom: 0, right: 0))
 
     }
     

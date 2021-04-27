@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
     
     private let fbLoginButton: FBLoginButton = {
         let button = FBLoginButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -67,6 +67,11 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
+        //background settings
+//        let background = CAGradientLayer.backgroundGradient()
+//        background.frame = self.view.bounds
+//        self.view.layer.insertSublayer(background, at: 0)
+        
         setupViews()
         setupLayout()
     }
@@ -86,15 +91,17 @@ class LoginViewController: UIViewController {
         logoImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         logoImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
+        logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70).isActive = true
         
         networkingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        networkingLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 35).isActive = true
+        networkingLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30).isActive = true
         networkingLabel.widthAnchor.constraint(equalToConstant: view.bounds.width / 5 * 3).isActive = true
         
-        fbLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        fbLoginButton.topAnchor.constraint(equalTo: networkingLabel.bottomAnchor, constant: 35).isActive = true
-        fbLoginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        //this stock Facebook button doesn't work correctly with Autolayout
+        fbLoginButton.frame = CGRect(x: self.view.bounds.width / 2 - 150,
+                                     y: 365,
+                                     width: 300,
+                                     height: 35)
         
         customFbLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         customFbLoginButton.topAnchor.constraint(equalTo: fbLoginButton.bottomAnchor, constant: 20).isActive = true
