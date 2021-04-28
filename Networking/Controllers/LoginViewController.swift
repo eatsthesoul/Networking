@@ -57,8 +57,19 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let signInButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        button.setTitle("Sign In with Email", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(signInHandler), for: .touchUpInside)
+        return button
+    }()
     
-    //MARK: - VC Lifecycle methods
+    
+//MARK: - VC Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +87,7 @@ class LoginViewController: UIViewController {
         setupLayout()
     }
     
-    //MARK: - Setup User Interface functions
+//MARK: - Setup User Interface methods
     
     private func setupViews() {
         view.addSubview(logoImageView)
@@ -84,6 +95,7 @@ class LoginViewController: UIViewController {
         view.addSubview(fbLoginButton)
         view.addSubview(customFbLoginButton)
         view.addSubview(googleButton)
+        view.addSubview(signInButton)
     }
     
     private func setupLayout() {
@@ -99,7 +111,7 @@ class LoginViewController: UIViewController {
         
         //this stock Facebook button doesn't work correctly with Autolayout
         fbLoginButton.frame = CGRect(x: self.view.bounds.width / 2 - 150,
-                                     y: 365,
+                                     y: 370,
                                      width: 300,
                                      height: 35)
         
@@ -112,10 +124,23 @@ class LoginViewController: UIViewController {
         googleButton.topAnchor.constraint(equalTo: customFbLoginButton.bottomAnchor, constant: 20).isActive = true
         googleButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         googleButton.widthAnchor.constraint(equalToConstant: 305).isActive = true
+        
+        signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        signInButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 30).isActive = true
+        signInButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        signInButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
+    
+//MARK: - Other methods
     
     func openMainVC() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func signInHandler() {
+        let signInVC = SignInVC()
+        signInVC.modalPresentationStyle = .fullScreen
+        self.present(signInVC, animated: true, completion: nil)
     }
 }
 
