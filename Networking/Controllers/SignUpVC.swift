@@ -43,6 +43,7 @@ class SignUpVC: UIViewController {
     }()
     private let passwordUnderline = UnderlineView()
     
+    //confirm password
     private let confirmPasswordLabel = LoginTextFieldLabel(with: "CONFIRM PASSWORD")
     private let confirmPasswordTextField: LoginTextField = {
         let textField = LoginTextField(contentType: .password, keyboardType: .default)
@@ -50,6 +51,13 @@ class SignUpVC: UIViewController {
         return textField
     }()
     private let confirmPasswordUnderline = UnderlineView()
+    
+    //continue button
+    lazy var continueButton: ContinueButton = {
+        let button = ContinueButton()
+        button.center = CGPoint(x: view.center.x, y: view.frame.height - 100)
+        return button
+    }()
     
 
     override func viewDidLoad() {
@@ -78,6 +86,8 @@ class SignUpVC: UIViewController {
         view.addSubview(confirmPasswordLabel)
         view.addSubview(confirmPasswordTextField)
         view.addSubview(confirmPasswordUnderline)
+        
+        view.addSubview(continueButton)
     }
 
     private func setupLayout() {

@@ -49,6 +49,12 @@ class SignInVC: UIViewController {
         button.addTarget(self, action: #selector(signUpHandler), for: .touchUpInside)
         return button
     }()
+    
+    lazy var continueButton: ContinueButton = {
+        let button = ContinueButton()
+        button.center = CGPoint(x: view.center.x, y: view.frame.height - 100)
+        return button
+    }()
 
 
     override func viewDidLoad() {
@@ -74,6 +80,8 @@ class SignInVC: UIViewController {
         view.addSubview(passwordUnderline)
         
         view.addSubview(signUpButton)
+        
+        view.addSubview(continueButton)
     }
     
     private func setupLayout() {
