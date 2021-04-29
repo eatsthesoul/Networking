@@ -9,8 +9,9 @@ import UIKit
 
 class SignUpVC: UIViewController {
     
-    private let backButton: UIButton = {
+    lazy var backButton: UIButton = {
         let button = BackButton()
+        button.frame.origin = CGPoint(x: view.bounds.width / 15, y: view.bounds.height / 17)
         button.addTarget(self, action: #selector(backButtonHandler), for: .touchUpInside)
         return button
     }()

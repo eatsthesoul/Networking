@@ -9,8 +9,9 @@ import UIKit
 
 class SignInVC: UIViewController {
     
-    private let backButton: UIButton = {
+    lazy var backButton: UIButton = {
         let button = BackButton()
+        button.frame.origin = CGPoint(x: view.bounds.width / 15, y: view.bounds.height / 17)
         button.addTarget(self, action: #selector(backButtonHandler), for: .touchUpInside)
         return button
     }()
@@ -59,7 +60,7 @@ class SignInVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("Width: \(self.view.frame.width)")
         setupViews()
         setupLayout()
         
