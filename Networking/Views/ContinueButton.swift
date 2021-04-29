@@ -17,14 +17,26 @@ class ContinueButton: UIButton {
         self.setTitleColor(CAGradientLayer.bottomColor, for: .normal)
         self.titleLabel?.font = .boldSystemFont(ofSize: 16)
         self.layer.cornerRadius = 6
+        self.isEnabled = false
     }
     
     convenience init() {
-        self.init(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        self.init(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setButton(enabled: Bool) {
+        if enabled {
+            self.alpha = 1.0
+            self.isEnabled = true
+        } else {
+            self.alpha = 0.4
+            self.isEnabled = false
+        }
+        
     }
     
 }

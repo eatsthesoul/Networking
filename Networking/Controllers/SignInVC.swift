@@ -11,7 +11,7 @@ class SignInVC: UIViewController {
     
     lazy var backButton: UIButton = {
         let button = BackButton()
-        button.frame.origin = CGPoint(x: view.bounds.width / 15, y: view.bounds.height / 17)
+        button.frame.origin = CGPoint(x: view.bounds.width / 15, y: topPadding + 20)
         button.addTarget(self, action: #selector(backButtonHandler), for: .touchUpInside)
         return button
     }()
@@ -53,17 +53,26 @@ class SignInVC: UIViewController {
     
     lazy var continueButton: ContinueButton = {
         let button = ContinueButton()
-        button.center = CGPoint(x: view.center.x, y: view.frame.height - 100)
+        button.center = CGPoint(x: view.center.x, y: view.frame.height - 80)
         return button
     }()
 
 
+    //MARK: - Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Width: \(self.view.frame.width)")
         setupViews()
         setupLayout()
         
+        textFieldsObserveSetup()
+        textFieldsDelegatesSetup()
+        swipeDownGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        keyboardObserveSetup()
     }
     
     //MARK: - Setup User Interface methods
@@ -88,8 +97,8 @@ class SignInVC: UIViewController {
     private func setupLayout() {
         
         //label
-        signInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                         constant: view.bounds.height / 15).isActive = true
+        signInLabel.topAnchor.constraint(equalTo: view.topAnchor,
+                                         constant: topPadding + 45).isActive = true
         signInLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //email
@@ -97,13 +106,13 @@ class SignInVC: UIViewController {
                           leading: view.leadingAnchor,
                           bottom: nil,
                           trailing: nil,
-                          padding: .init(top: 20, left: 50, bottom: 0, right: 0))
+                          padding: .init(top: 30, left: 50, bottom: 0, right: 0))
         
         emailTextField.anchor(top: emailLabel.bottomAnchor,
                               leading: view.leadingAnchor,
                               bottom: nil,
                               trailing: view.trailingAnchor,
-                              padding: .init(top: 10, left: 50, bottom: 0, right: 50))
+                              padding: .init(top: 8, left: 50, bottom: 0, right: 50))
         
         emailUnderline.anchor(top: emailTextField.bottomAnchor,
                               leading: emailTextField.leadingAnchor,
@@ -117,13 +126,13 @@ class SignInVC: UIViewController {
                              leading: view.leadingAnchor,
                              bottom: nil,
                              trailing: nil,
-                             padding: .init(top: 40, left: 50, bottom: 0, right: 0))
+                             padding: .init(top: 25, left: 50, bottom: 0, right: 0))
         
         passwordTextField.anchor(top: passwordLabel.bottomAnchor,
                                  leading: view.leadingAnchor,
                                  bottom: nil,
                                  trailing: view.trailingAnchor,
-                                 padding: .init(top: 10, left: 50, bottom: 0, right: 50))
+                                 padding: .init(top: 8, left: 50, bottom: 0, right: 50))
         
         passwordUnderline.anchor(top: passwordTextField.bottomAnchor,
                               leading: passwordTextField.leadingAnchor,
@@ -140,6 +149,53 @@ class SignInVC: UIViewController {
         
     }
     
+    //MARK: - Keyboard methods
+    
+    private func keyboardObserveSetup() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillAppear),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc private func keyboardWillAppear(notification: NSNotification) {
+        
+        let userInfo = notification.userInfo!
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        continueButton.center = CGPoint(x: view.center.x,
+                                        y: view.frame.height - keyboardFrame.height - 16.0 - continueButton.frame.height / 2)
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        
+        continueButton.center = CGPoint(x: view.center.x, y: view.frame.height - 80)
+    }
+    
+
+    //MARK: - Continue button activity methods
+    
+    private func textFieldsObserveSetup() {
+        emailTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+    }
+    
+    @objc private func textFieldChanged() {
+        
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text
+        else { return }
+        
+        let formFilled = !(email.isEmpty) && !(password.isEmpty)
+        
+        continueButton.setButton(enabled: formFilled)
+    }
+    
     //MARK: - Handlers
     
     @objc private func signUpHandler() {
@@ -150,5 +206,35 @@ class SignInVC: UIViewController {
     
     @objc private func backButtonHandler() {
         self.dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension SignInVC: UIGestureRecognizerDelegate {
+    
+    //hide keyboard with swipe down gesture
+    private func swipeDownGesture() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        swipeDown.delegate = self
+        swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+extension SignInVC: UITextFieldDelegate {
+    
+    private func textFieldsDelegatesSetup() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    //hide keyboard with return tap
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

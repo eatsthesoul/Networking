@@ -10,6 +10,12 @@ import FBSDKCoreKit
 import Firebase
 import GoogleSignIn
 
+let topPadding: CGFloat = {
+    let window = UIApplication.shared.keyWindow
+    let topPadding = window?.safeAreaInsets.top
+    return topPadding!
+}()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
