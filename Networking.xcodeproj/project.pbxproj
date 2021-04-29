@@ -16,6 +16,7 @@
 		4F6374AF2639CDB900686CCE /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6374AE2639CDB900686CCE /* LoginTextField.swift */; };
 		4F6374B32639D46200686CCE /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6374B22639D46200686CCE /* UnderlineView.swift */; };
 		4F72CD6C26149D3E00C8F9C8 /* AlamofireNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72CD6B26149D3E00C8F9C8 /* AlamofireNetworkingService.swift */; };
+		4F7D4E86263A7E2500186A1B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D4E85263A7E2500186A1B /* BackButton.swift */; };
 		4F83102E25F8EFE7009F8817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83102D25F8EFE7009F8817 /* AppDelegate.swift */; };
 		4F83103225F8EFE7009F8817 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83103125F8EFE7009F8817 /* MenuViewController.swift */; };
 		4F83103725F8EFEC009F8817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F83103625F8EFEC009F8817 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		4F6374AE2639CDB900686CCE /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		4F6374B22639D46200686CCE /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		4F72CD6B26149D3E00C8F9C8 /* AlamofireNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkingService.swift; sourceTree = "<group>"; };
+		4F7D4E85263A7E2500186A1B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		4F83102A25F8EFE7009F8817 /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F83102D25F8EFE7009F8817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F83103125F8EFE7009F8817 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				4F6374AB26399F0900686CCE /* LoginTextFieldLabel.swift */,
 				4F6374AE2639CDB900686CCE /* LoginTextField.swift */,
 				4F6374B22639D46200686CCE /* UnderlineView.swift */,
+				4F7D4E85263A7E2500186A1B /* BackButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			files = (
 				4F922952262701B600EB505C /* LoginViewController.swift in Sources */,
 				4F922968262EF69100EB505C /* TabBarController.swift in Sources */,
+				4F7D4E86263A7E2500186A1B /* BackButton.swift in Sources */,
 				4F6374A526398DCF00686CCE /* SignInVC.swift in Sources */,
 				4F72CD6C26149D3E00C8F9C8 /* AlamofireNetworkingService.swift in Sources */,
 				4F83104625F8F5A7009F8817 /* UIView + AnchoredConstraints.swift in Sources */,

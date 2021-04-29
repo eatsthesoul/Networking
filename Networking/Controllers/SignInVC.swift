@@ -9,12 +9,7 @@ import UIKit
 
 class SignInVC: UIViewController {
     
-    private let backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "back"), for: .normal)
-        button.backgroundColor = .clear
-        return button
-    }()
+    private let backButton = BackButton()
     
     private let signInLabel: UILabel = {
         let label = UILabel()
@@ -78,13 +73,6 @@ class SignInVC: UIViewController {
     }
     
     private func setupLayout() {
-        
-        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                          leading: view.leadingAnchor,
-                          bottom: nil,
-                          trailing: nil,
-                          padding: .init(top: 15, left: 30, bottom: 0, right: 0),
-                          size: .init(width: 30, height: 30))
         
         //label
         signInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
