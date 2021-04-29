@@ -78,11 +78,6 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
-        //background settings
-//        let background = CAGradientLayer.backgroundGradient()
-//        background.frame = self.view.bounds
-//        self.view.layer.insertSublayer(background, at: 0)
-        
         setupViews()
         setupLayout()
     }

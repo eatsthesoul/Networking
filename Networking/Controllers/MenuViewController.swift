@@ -61,11 +61,6 @@ class MenuViewController: UIViewController {
         setupViews()
         setupLayout()
         
-//        //background settings
-//        let background = CAGradientLayer.backgroundGradient()
-//        background.frame = self.view.bounds
-//        self.view.layer.insertSublayer(background, at: 0)
-        
         //that stuff will be open when app reload in the background after background tasks will be completed
         backgroundDownloadService.fileLocation = { (location) in
             self.downloadedFilePath = location

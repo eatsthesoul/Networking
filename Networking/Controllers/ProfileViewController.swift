@@ -46,10 +46,6 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let background = CAGradientLayer.backgroundGradient()
-//        background.frame = self.view.bounds
-//        self.view.layer.insertSublayer(background, at: 0)
 
         setupViews()
         setupLayout()
