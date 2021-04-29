@@ -17,6 +17,7 @@
 		4F6374B32639D46200686CCE /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6374B22639D46200686CCE /* UnderlineView.swift */; };
 		4F72CD6C26149D3E00C8F9C8 /* AlamofireNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72CD6B26149D3E00C8F9C8 /* AlamofireNetworkingService.swift */; };
 		4F7D4E86263A7E2500186A1B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D4E85263A7E2500186A1B /* BackButton.swift */; };
+		4F7D4E89263A81B200186A1B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D4E88263A81B200186A1B /* SignUpVC.swift */; };
 		4F83102E25F8EFE7009F8817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83102D25F8EFE7009F8817 /* AppDelegate.swift */; };
 		4F83103225F8EFE7009F8817 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83103125F8EFE7009F8817 /* MenuViewController.swift */; };
 		4F83103725F8EFEC009F8817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F83103625F8EFEC009F8817 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		4F6374B22639D46200686CCE /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		4F72CD6B26149D3E00C8F9C8 /* AlamofireNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkingService.swift; sourceTree = "<group>"; };
 		4F7D4E85263A7E2500186A1B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		4F7D4E88263A81B200186A1B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		4F83102A25F8EFE7009F8817 /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F83102D25F8EFE7009F8817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F83103125F8EFE7009F8817 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				4F922967262EF69100EB505C /* TabBarController.swift */,
 				4F922951262701B600EB505C /* LoginViewController.swift */,
 				4F6374A426398DCF00686CCE /* SignInVC.swift */,
+				4F7D4E88263A81B200186A1B /* SignUpVC.swift */,
 				4F83103125F8EFE7009F8817 /* MenuViewController.swift */,
 				4F9229632628C5C800EB505C /* ProfileViewController.swift */,
 				4F8C0FB525FA14E60009591D /* DownloadImageViewController.swift */,
@@ -339,6 +342,7 @@
 				4F6374AF2639CDB900686CCE /* LoginTextField.swift in Sources */,
 				4F52CF1425FEAF0100A53FEE /* GetRequestTableViewCell.swift in Sources */,
 				4F4A2084261301620065BB13 /* BackgroundDownloadService.swift in Sources */,
+				4F7D4E89263A81B200186A1B /* SignUpVC.swift in Sources */,
 				4F4A207E2609E7280065BB13 /* MenuCollectionViewCell.swift in Sources */,
 				4F4A20812611B25A0065BB13 /* ImageProperties.swift in Sources */,
 				4F83102E25F8EFE7009F8817 /* AppDelegate.swift in Sources */,

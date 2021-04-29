@@ -9,7 +9,11 @@ import UIKit
 
 class SignInVC: UIViewController {
     
-    private let backButton = BackButton()
+    private let backButton: UIButton = {
+        let button = BackButton()
+        button.addTarget(self, action: #selector(backButtonHandler), for: .touchUpInside)
+        return button
+    }()
     
     private let signInLabel: UILabel = {
         let label = UILabel()
@@ -127,7 +131,15 @@ class SignInVC: UIViewController {
         
     }
     
+    //MARK: - Handlers
+    
     @objc private func signUpHandler() {
-        
+        let signUpVC = SignUpVC()
+        signUpVC.modalPresentationStyle = .fullScreen
+        present(signUpVC, animated: true, completion: nil)
+    }
+    
+    @objc private func backButtonHandler() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
