@@ -9,15 +9,22 @@ import UIKit
 
 class ContinueButton: UIButton {
 
+    private let spinner = UIActivityIndicatorView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor(white: 1, alpha: 0.4)
+        self.backgroundColor = .white
+        self.alpha = 0.4
         self.setTitle("Continue", for: .normal)
         self.setTitleColor(CAGradientLayer.bottomColor, for: .normal)
         self.titleLabel?.font = .boldSystemFont(ofSize: 16)
         self.layer.cornerRadius = 6
         self.isEnabled = false
+        
+        self.addSubview(spinner)
+        spinner.center = self.center
+        spinner.backgroundColor = CAGradientLayer.bottomColor
     }
     
     convenience init() {
@@ -36,7 +43,16 @@ class ContinueButton: UIButton {
             self.alpha = 0.4
             self.isEnabled = false
         }
-        
     }
     
+    func startSpinner() {
+        spinner.startAnimating()
+        setButton(enabled: false)
+        self.setTitle("", for: .normal)
+    }
+    
+    func stopSpinner() {
+        spinner.stopAnimating()
+        self.setTitle("Continue", for: .normal)
+    }
 }

@@ -62,6 +62,7 @@ class SignUpVC: UIViewController {
     lazy var continueButton: ContinueButton = {
         let button = ContinueButton()
         button.center = CGPoint(x: view.center.x, y: view.frame.height - 80)
+        button.addTarget(self, action: #selector(continueButtonHandler), for: .touchUpInside)
         return button
     }()
     
@@ -208,6 +209,10 @@ class SignUpVC: UIViewController {
     
     @objc private func backButtonHandler() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func continueButtonHandler() {
+        continueButton.startSpinner()
     }
     
     //MARK: - Continue button activity methods
