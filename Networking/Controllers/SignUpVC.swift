@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpVC: UIViewController {
+    
+    private var username = String()
+    private var email = String()
+    private var password = String()
+    private var confirmedPassword = String()
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: view.frame)
@@ -111,7 +117,7 @@ class SignUpVC: UIViewController {
     }
     
     private func setupLayout() {
-
+        
         //signUpLabel
         signUpLabel.topAnchor.constraint(equalTo: scrollView.topAnchor,
                                          constant: topPadding + 45).isActive = true
@@ -211,9 +217,80 @@ class SignUpVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    //MARK: - Sign up request methods
+    
     @objc private func continueButtonHandler() {
         continueButton.startSpinner()
+        gettingUserInfo()
+        validatePassword()
+        signUpRequest()
     }
+    
+    private func gettingUserInfo() {
+        
+        self.username = usernameTextField.text!
+        self.email = emailTextField.text!
+        self.password = passwordTextField.text!
+        self.confirmedPassword = confirmPasswordTextField.text!
+    }
+    
+    private func validatePassword() {
+        
+        //password is short
+        if password.count < 6 {
+            
+            createUserInfoAlert(with: "Your password is short. This must contain at least 6 characters")
+            continueButton.stopSpinner()
+            return
+            
+        //passwords are different
+        } else if password != confirmedPassword {
+            
+            createUserInfoAlert(with: "You entered two different passwords. Please try again")
+            continueButton.stopSpinner()
+            return
+            
+        } else {
+            
+            signUpRequest()
+        }
+    }
+
+    
+    private func signUpRequest() {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            
+            if let error = error {
+                self.createUserInfoAlert(with: error.localizedDescription)
+                self.continueButton.stopSpinner()
+                self.continueButton.setButton(enabled: true)
+                return
+            }
+            
+            print("User is logged in")
+            
+            //other user data saving
+            if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                changeRequest.displayName = self.username
+                changeRequest.commitChanges { (error) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        self.continueButton.stopSpinner()
+                        self.continueButton.setButton(enabled: true)
+                        return
+                    }
+                    
+                    print("User data was saved")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+
     
     //MARK: - Continue button activity methods
     
@@ -292,7 +369,7 @@ class SignUpVC: UIViewController {
     
 }
 
-    //MARK: - UIGestureRecognizerDelegate
+//MARK: - UIGestureRecognizerDelegate
 extension SignUpVC: UIGestureRecognizerDelegate {
     
     //hide keyboard with swipe down gesture
@@ -308,7 +385,7 @@ extension SignUpVC: UIGestureRecognizerDelegate {
     }
 }
 
-    //MARK: - UITextFieldDelegate
+//MARK: - UITextFieldDelegate
 extension SignUpVC: UITextFieldDelegate {
     
     private func textFieldsDelegatesSetup() {

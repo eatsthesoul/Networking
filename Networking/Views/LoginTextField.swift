@@ -13,6 +13,7 @@ class LoginTextField: UITextField {
         super.init(frame: .zero)
         self.textContentType = contentType
         self.keyboardType = keyboardType
+        self.autocapitalizationType = .none
         self.backgroundColor = .clear
         self.textColor = .white
         self.font = .systemFont(ofSize: 18)
