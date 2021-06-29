@@ -225,7 +225,7 @@ class SignUpVC: UIViewController {
         continueButton.startSpinner()
         gettingUserInfo()
         validatePassword()
-        signUpRequest()
+//        signUpRequest()
     }
     
     private func gettingUserInfo() {

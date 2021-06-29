@@ -156,6 +156,8 @@ extension ProfileViewController {
     //log out functionality
     @objc private func logOut() {
         
+        getCurrentProvider()
+        
         switch self.provider {
         
         case "facebook.com":
@@ -173,8 +175,13 @@ extension ProfileViewController {
             print("User logged out of Google")
             openLoginVC()
             
+        case "password":
+            try! Auth.auth().signOut()
+            print("User signed out")
+            openLoginVC()
+            
         default:
-            break
+            print(provider ?? "provider is nil")
         }
     }
 }
