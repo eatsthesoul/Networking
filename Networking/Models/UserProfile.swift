@@ -34,4 +34,10 @@ struct UserProfile {
         self.name = name
         self.email = email
     }
+    
+    init(id: String, name: String, email: String?) {
+        self.id = id
+        self.name = name
+        self.email = email
+    }
 }

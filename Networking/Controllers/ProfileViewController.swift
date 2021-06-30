@@ -100,26 +100,33 @@ extension ProfileViewController {
         }
     }
     
-    //fetching user info from Firebase database
+    
     private func fetchUserInfo() {
         
         if let currentUser = Auth.auth().currentUser {
             
-            let userID = currentUser.uid
-            let dataPath = Database.database().reference().child("users").child(userID)
-            
-            dataPath.observeSingleEvent(of: .value) { (snapshot) in
+            //fetching user info if he logged in with Email/Password
+            if let userName = currentUser.displayName {
                 
-                guard let userInfo = snapshot.value as? [String : Any] else { return }
-                self.currentUser = UserProfile(uid: userID, data: userInfo)
+                spinnerForLabel.stopAnimating()
+                label.isHidden = false
+                self.currentUser = UserProfile(id: currentUser.uid, name: userName, email: currentUser.email)
+                label.text = getLabelText()
+               
+            //fetching user info from Firebase database
+            } else {
                 
-                self.label.text = self.getLabelText()
+                let userID = currentUser.uid
+                let dataPath = Database.database().reference().child("users").child(userID)
                 
-                self.spinnerForLabel.stopAnimating()
-                
-            } withCancel: { (error) in
-                
-                print(error.localizedDescription)
+                dataPath.observeSingleEvent(of: .value) { (snapshot) in
+                    guard let userInfo = snapshot.value as? [String : Any] else { return }
+                    self.currentUser = UserProfile(uid: userID, data: userInfo)
+                    self.label.text = self.getLabelText()
+                    self.spinnerForLabel.stopAnimating()
+                } withCancel: { (error) in
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -148,6 +155,8 @@ extension ProfileViewController {
             return "Facebook"
         case "google.com":
             return "Google"
+        case "password":
+            return "Email"
         default:
             return ""
         }
