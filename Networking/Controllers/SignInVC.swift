@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignInVC: UIViewController {
     
@@ -210,7 +211,25 @@ class SignInVC: UIViewController {
     }
 
     @objc private func continueButtonHandler() {
+        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text
+        else { return }
+        
         continueButton.startSpinner()
+        
+        //sign in with email
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+             
+            if let error = error {
+                self.createUserInfoAlert(with: error.localizedDescription)
+                self.continueButton.stopSpinner()
+                return
+            }
+            
+            print("Succesfully logged in with Email")
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true)
+        }
     }
 }
 
