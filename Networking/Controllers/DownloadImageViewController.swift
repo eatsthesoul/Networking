@@ -96,10 +96,6 @@ class DownloadImageViewController: UIViewController {
         completedLabel.isHidden = false
         progressView.isHidden = false
         
-//        completedLabel.text = AlamofireNetworkingService.completed { completed in
-//
-//        }
-        
         AlamofireNetworkingService.completed = { completed in
             self.completedLabel.text = completed
         }

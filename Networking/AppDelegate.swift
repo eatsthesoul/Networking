@@ -6,6 +6,15 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import Firebase
+import GoogleSignIn
+
+let topPadding: CGFloat = {
+    let window = UIApplication.shared.keyWindow
+    let topPadding = window?.safeAreaInsets.top
+    return topPadding!
+}()
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,14 +23,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        //Facebook SDK
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        
+        //Firebase SDK
+        FirebaseApp.configure()
+        
+        //Google SDK
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        let menuVC = MenuViewController()
-        let navigationController = UINavigationController(rootViewController: menuVC)
-        window?.rootViewController = navigationController
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
-        window?.backgroundColor = .systemGray5
-        // Override point for customization after application launch.
+        
+        //background settings
+        let background = CAGradientLayer.backgroundGradient()
+        background.frame = window?.bounds ?? CGRect()
+        window?.layer.insertSublayer(background, at: 0)
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+//        ApplicationDelegate.shared.application(
+//            app,
+//            open: url,
+//            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+//            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+//        )
+        
+        return GIDSignIn.sharedInstance().handle(url)
     }
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {

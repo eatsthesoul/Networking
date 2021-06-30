@@ -29,6 +29,7 @@ class MenuViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .clear
+        collectionView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 25, right: 0)
         return collectionView
     }()
     
@@ -57,7 +58,6 @@ class MenuViewController: UIViewController {
         menuCollectionView.delegate = self
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.identifier)
         
-        setupNavigationController()
         setupViews()
         setupLayout()
         
@@ -68,6 +68,7 @@ class MenuViewController: UIViewController {
             self.postNotification()
         }
         
+        //background notification
         registerForNotification()
     }
     
@@ -84,12 +85,8 @@ class MenuViewController: UIViewController {
                           leading: view.safeAreaLayoutGuide.leadingAnchor,
                           bottom: view.safeAreaLayoutGuide.bottomAnchor,
                           trailing: view.safeAreaLayoutGuide.trailingAnchor,
-                          padding: .init(top: 30, left: 0, bottom: 0, right: 0))
+                          padding: .init(top: 0, left: 0, bottom: 0, right: 0))
 
-    }
-    
-    private func setupNavigationController() {
-        navigationItem.title = "Menu"
     }
     
     
@@ -197,7 +194,7 @@ class MenuViewController: UIViewController {
         downloadAlert.addAction(cancelAction)
         
         // activity indicator
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.startAnimating()
         self.downloadAlert.view.addSubview(activityIndicator)
         activityIndicator.centerInSuperview()
@@ -218,8 +215,6 @@ class MenuViewController: UIViewController {
             progressView.progress = Float(progress)
             self.downloadAlert.message = "\(Int(progress * 100))%"
         }
-        
-        
         
         present(downloadAlert, animated: true)
     }
@@ -314,3 +309,5 @@ extension MenuViewController {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
+
+
